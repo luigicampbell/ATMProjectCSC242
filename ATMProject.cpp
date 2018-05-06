@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int main()
+void topMenu()
 {
   // Basic Menu displayed
   int option = 0;
@@ -14,6 +14,13 @@ int main()
   << endl
   << "3. Deposit"
   << endl
-  <<
+  << "4. Withdraw"
+  << endl
+  << "5. Exit"
+  return 0;
+}
+int main()
+{
+
   return 0;
 }
