@@ -3,12 +3,12 @@
 
 using namespace std;
 
-void topMenu(bool loggedIn)
+void topMenu()
 {
   // 1) Basic Menu displayed
   // 2) User must log in to access functions
   int option = 0;
-  loggedIn = false;
+  int accountNumber = -1;
   cout
   << "1. Sign in"
   << endl
@@ -19,38 +19,87 @@ void topMenu(bool loggedIn)
   << "4. Withdraw"
   << endl
   << "5. Exit"
+  << endl;
 
+  cin
+  >> option;
+
+  if (option == 1 ){
+    signIn(accountNumber);
+  }
+  if (option == 2 && accountNumber != -1 ){
+    balance(accountNumber);
+  }
+  if (option == 3 && accountNumber != -1 ){
+    deposit(accountNumber);
+  }
+  if (option == 4 && accountNumber != -1 ){
+    withdraw(accountNumber);
+  }
+  if (option == 5 && accountNumber != -1 ){
+    goodbye(accountNumber);
+  }
 }
 
-bool goodbye(bool loggedIn)
+int goodbye(int& accountNumber)
 {
 
   // 1) Displays Good Bye exits returns logged in bool false
+  cout
+  << "Goodbye";
   // 2) Starts topMenu
-  return loggedIn;
+  accountNumber = -1;
+  topMenu();
 }
 
 // Sign In function
-bool signIn(bool loggedIn)
+int signIn(int& accountNumber)
 {
+  cout
+  << "Please enter your account number from the following list:  0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ..."
+  << endl;
+
+  cin
+  >> accountNumber;
+
   // 1) Holds accounts for only 10 people in Array
   // 2) All have starting balance of $1000
   // 3) User types in an account number from 0 to 10 to access balance
   // 4) incorrect number or attempt to access other options without signing in
   // returns logged in bool false then runs top menu
-  return loggedIn;
+
+  if (accountNumber > -1 || accountNumber < 10 ){
+    return accountNumber;
+  }
+  else
+  topMenu();
 }
 
 // Balance
-void balance()
+void balance(int& accountNumber)
 {
+  double accounts [] =
+  // Need to pass values by reference
+
+                          {
+                            1000.00,
+                            1000.00,
+                            1000.00,
+                            1000.00,
+                            1000.00,
+                            1000.00,
+                            1000.00,
+                            1000.00,
+                            1000.00,
+                            1000.00
+                          };
   // 1) Display current balance
   // 2) Diplay "low balance" For low balance (if below $100)
   // 3) Run top menu with bool logged in true
 }
 
 // Deposit
-double deposit(double depositedAmount)
+double deposit(double& depositedAmount)
 {
   // 1) Prompt user for amount to deposit
   // 2) If input is negative count updated max 3 warns user invalid amount
@@ -60,7 +109,7 @@ double deposit(double depositedAmount)
 }
 
 // Withdraw
-double withdraw(double withdrawnAmount)
+double withdraw(int& accountNumber, double& withdrawnAmount)
 {
   // 1) Prompt user to enter amount to withdraw
   // 2) Checks if user has enough then subtracts amount
