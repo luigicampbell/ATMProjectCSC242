@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 
 using namespace std;
 
@@ -10,7 +11,8 @@ void goodbye(int &accountNumber)
 
   // 1) Displays Good Bye exits returns logged in bool false
   cout
-  << "Goodbye";
+  << "Goodbye"
+  << endl;
   // 2) Starts topMenu
   accountNumber = -1;
   topMenu();
@@ -21,6 +23,9 @@ void signIn(int &accountNumber)
 {
   int newAccountNumber;
   cout
+  << "Current Account Number: "
+  << accountNumber
+  << endl
   << "Please enter your account number from the following list:  0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ..."
   << endl;
 
@@ -33,6 +38,10 @@ void signIn(int &accountNumber)
   // 4) incorrect number or attempt to access other options without signing in
   // returns logged in bool false then runs top menu
   accountNumber = newAccountNumber;
+  cout
+  << "Selected Account Number: "
+  << accountNumber
+  << endl;
   topMenu();
 
 }
@@ -44,9 +53,9 @@ void balance(int &accountNumber)
   // Need to pass values by reference
 
                           {
+                            4.00,
                             1000.00,
-                            1000.00,
-                            1000.00,
+                            5.00,
                             1000.00,
                             1000.00,
                             1000.00,
@@ -57,6 +66,8 @@ void balance(int &accountNumber)
                           };
     double account = accounts[accountNumber];
     cout
+    << setprecision(2)
+    << fixed
     << account
     << endl;
     topMenu();
@@ -91,6 +102,9 @@ void topMenu()
   int option = 0;
   int accountNumber;
   cout
+  <<"Account Number: "
+  << accountNumber
+  << endl
   << "1. Sign in"
   << endl
   << "2. Balance"
@@ -120,8 +134,15 @@ void topMenu()
   // if (option == 4 && accountNumber != -1 ){
   //   withdraw(accountNumber);
   // }
-  if (option == 5 && accountNumber != -1 ){
-    goodbye(accountNumber);
+  if ( option == 5 && accountNumber != -1 ){
+    goodbye( accountNumber );
+  }
+  if ( option < 1 || option > 5 )
+  {
+    cout
+    << "Invalid option.."
+    << endl;
+    topMenu();
   }
 }
 
